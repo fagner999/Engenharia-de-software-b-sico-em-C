@@ -1,0 +1,129 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#define MAX_NOME 50
+#define ARQUIVO "inventario_loja.csv"
+
+// Função para cadastrar um novo produto
+void cadastrarProduto() {
+    char nome[MAX_NOME];
+    int quantidade;
+    float preco;
+
+    FILE *arquivo = fopen(ARQUIVO, "a");
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo.\n");
+        return;
+    }
+
+    // Entrada de dados do produto
+    printf("Digite o nome do produto: ");
+    scanf("%s", nome);
+    printf("Digite a quantidade em estoque: ");
+    scanf("%d", &quantidade);
+    printf("Digite o preco do produto: ");
+    scanf("%f", &preco);
+
+    // Escreve os dados no arquivo CSV
+    fprintf(arquivo, "%s,%d,%.2f\n", nome, quantidade, preco);
+    fclose(arquivo);
+
+    printf("Produto cadastrado com sucesso!\n");
+}
+
+// Função para consultar informações de um produto
+void consultarProduto() {
+    char nome[MAX_NOME];
+    char nomeArquivo[MAX_NOME];
+    int quantidade;
+    float preco;
+    int encontrado = 0;
+
+    printf("Digite o nome do produto a ser consultado: ");
+    scanf("%s", nome);
+
+    FILE *arquivo = fopen(ARQUIVO, "r");
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo.\n");
+        return;
+    }
+
+    // Leitura e busca do produto no arquivo
+    while (fscanf(arquivo, "%[^,],%d,%f\n", nomeArquivo, &quantidade, &preco) != EOF) {
+        if (strcmp(nome, nomeArquivo) == 0) {
+            printf("Produto encontrado:\n");
+            printf("Nome: %s\n", nomeArquivo);
+            printf("Quantidade: %d\n", quantidade);
+            printf("Preco: R$%.2f\n", preco);
+            encontrado = 1;
+            break;
+        }
+    }
+
+    fclose(arquivo);
+
+    if (!encontrado) {
+        printf("Produto nao encontrado.\n");
+    }
+}
+
+// Função para exibir todos os produtos
+void exibirTodosProdutos() {
+    char nome[MAX_NOME];
+    int quantidade;
+    float preco;
+
+    FILE *arquivo = fopen(ARQUIVO, "r");
+    if (arquivo == NULL) {
+        printf("Erro ao abrir o arquivo.\n");
+        return;
+    }
+
+    printf("Lista de produtos cadastrados:\n");
+    printf("----------------------------------\n");
+
+    // Leitura do arquivo e exibição dos produtos
+    while (fscanf(arquivo, "%[^,],%d,%f\n", nome, &quantidade, &preco) != EOF) {
+        printf("Nome: %s\n", nome);
+        printf("Quantidade: %d\n", quantidade);
+        printf("Preco: R$%.2f\n", preco);
+        printf("----------------------------------\n");
+    }
+
+    fclose(arquivo);
+}
+
+// Função principal
+int main() {
+    int opcao;
+
+    while (1) {
+        printf("\nSistema de Controle de Inventario\n");
+        printf("1. Cadastrar novo produto\n");
+        printf("2. Consultar produto\n");
+        printf("3. Exibir todos os produtos\n");
+        printf("4. Sair\n");
+        printf("Escolha uma opcao: ");
+        scanf("%d", &opcao);
+
+        switch (opcao) {
+            case 1:
+                cadastrarProduto();
+                break;
+            case 2:
+                consultarProduto();
+                break;
+            case 3:
+                exibirTodosProdutos();
+                break;
+            case 4:
+                printf("Encerrando o programa...\n");
+                exit(0);
+            default:
+                printf("Opcao invalida!\n");
+        }
+    }
+
+    return 0;
+}
