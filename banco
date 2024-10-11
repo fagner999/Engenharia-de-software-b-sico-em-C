@@ -1,0 +1,155 @@
+/******************************************************************************
+ 
+                            Online C Compiler.
+                Code, Compile, Run and Debug C program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+ 
+*******************************************************************************/
+ 
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include <locale.h>
+int main()
+{ 
+    //declarção de variaveis:
+    int saldo_aleatorio,senha,senhaV,menu_opcao,LOOP,interacao,valor_tabela;
+    int Valor_deposito = 0;
+    int Valor_saque = 0;
+    char usuario[40];
+    int tabela[10] = {0};
+   
+    // inicio da logica
+    setlocale(LC_ALL,"portuguese");
+    LOOP = 1;
+    // gerando nome a partir do tempo da maquina
+    srand(time (NULL)); 
+    saldo_aleatorio = 500 + rand()%1500;
+    int saldo_atual = saldo_aleatorio - Valor_saque + Valor_deposito;
+      system("clear");
+    printf("--------------------");
+    printf("   Bem-vindo a nubank   ");
+    printf("--------------------");
+    system("sleep 1");
+    system("clear");
+    printf("\ninforme o nome do usuario: ");
+    scanf("%s",&usuario);
+    printf("\ninforme a senha numerica: ");
+    scanf("%d",&senha);
+    
+    
+    system("clear");
+        while (LOOP == 1){
+    
+    // menu
+    system("clear");
+    printf("--------------------");
+    printf("   Bem-vindo ao menu  nubank sr.%s  ", & usuario);
+    printf("--------------------\n \n");
+    printf("1.Consultar saldo\n");
+    printf("2.Realizar saque\n");
+    printf("3.Realizar deposito\n");
+    printf("4.Inserir tabela de preço\n");
+    printf("5.Apresentar Saldo\n");
+    printf("6.Sair\n");
+    scanf("%d",& menu_opcao);
+     system("clear");
+    
+            switch(menu_opcao){
+              
+                case 1:
+                
+                    system("clear");
+                    printf("Saldo inicial: R$ %d,00\n",saldo_atual);
+                    system("sleep 5");
+                    system("clear");
+                break;
+                    
+                case 2:
+                    system("clear");
+                    printf("Saldo atual: R$ %d,00\n",saldo_aleatorio);
+                    printf("digite o valor do saque:\n");
+                    scanf("%d",& Valor_saque);
+                    printf("confirme sua senha númerica:\n");
+                    scanf("%d",&senhaV);
+                    
+                        if(senhaV == senha && Valor_saque<saldo_aleatorio){
+                            system("clear");
+                            printf("--------------------");
+                            printf("transição foi aprovada!");
+                            printf("--------------------\n");
+                            system("clear");
+                            printf("--------------------");
+                            printf("aguarde a contagem das notas");
+                            printf("--------------------\n");
+                            system("sleep 2");
+                            system("clear");
+                            printf("saque realizado.\nSaldo atual R$ %d,00\n", saldo_atual);
+                            system("sleep 5");
+                            
+                            
+                    }
+                    
+                        else{
+                            
+                             printf("--------------------");
+                            printf("transição foi negada!");
+                            printf("--------------------\n");
+                            system("clear");
+                            system("sleep 5");
+                            
+                        }
+                    
+                break;
+                
+                case 3:
+                
+                    system("clear");
+                    printf("Saldo atual: R$ %d,00\n",saldo_atual);
+                    printf("digite o valor do deposito:\n");
+                    scanf("%d",& Valor_deposito);
+                    system("clear");
+                    system("sleep 2");
+                    printf("deposito realizado.\nSaldo atual R$ %d,00\n", saldo_atual);
+                    system("sleep 2");
+                break;   
+                
+                case 4:
+                    
+                    system("clear");
+                    printf("Informe a quantidade de tabelas de crédito ou de débito\n");
+                    scanf("%d", &interacao);  
+                    
+                    for (int i; i<interacao; i++){
+                    
+                    system("sleep 2");
+                    system("clear");
+                    printf("Informe o valor:\n");
+                    scanf("%d", &valor_tabela);   
+                    tabela[i] = valor_tabela;
+                    saldo_atual += (valor_tabela);
+                    }
+                      
+                
+                case 5:
+                
+                    system("clear");
+                    printf("Saldo inicial: R$ %d,00\n",saldo_atual);
+                    system("sleep 5");
+                    system("clear");
+                break;
+                
+                case 6:
+                
+                    LOOP = 0;
+                break;
+                
+            
+        
+        
+    }
+    
+    }
+    return 0;
+}
+
