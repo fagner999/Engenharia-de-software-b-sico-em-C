@@ -17,7 +17,7 @@ int main()
     int Valor_deposito = 0;
     int Valor_saque = 0;
     char usuario[40];
-    int tabela[10] = {0};
+    float tabela[10] = {0};
    
     // inicio da logica
     setlocale(LC_ALL,"portuguese");
@@ -127,7 +127,19 @@ int main()
                     printf("Informe o valor:\n");
                     scanf("%d", &valor_tabela);   
                     tabela[i] = valor_tabela;
-                    saldo_atual += (valor_tabela);
+                    
+                    if(valor_tabela<0 ){
+                     int valor_negativo = valor_tabela * -1;   
+                        if(valor_negativo < saldo_atual){
+                            saldo_atual += (valor_tabela);
+                        }
+                        else{
+                            printf("fala na operação\n");
+                        }
+                    }
+                    else{
+                            printf("fala na operação\n");
+                        }
                     }
                       
                 
@@ -152,4 +164,3 @@ int main()
     }
     return 0;
 }
-
