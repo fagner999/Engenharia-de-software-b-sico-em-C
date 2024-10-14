@@ -108,17 +108,17 @@ int main()
                     printf("Informe o valor:\n");
                     scanf("%d", &valor_tabela);   
                     tabela[i] = valor_tabela;
-                    if(valor_tabela<0 ){
+                    if(valor_tabela <0 ){
                      int valor_negativo = valor_tabela * -1;   
                         if(valor_negativo < saldo_atual){
                             saldo_atual += (valor_tabela);
                         }
                         else{
-                            printf("fala na operação\n");
+                          saldo_atual += (valor_tabela);
                         }
                     }
                     else{
-                            printf("fala na operação\n");
+                            saldo_atual += (valor_tabela);
                         }
                     }
  
@@ -140,7 +140,7 @@ int main()
                     fprintf(pont_arq,"Valor depositado: %d\n", Valor_deposito);
                     fprintf(pont_arq,"Valor sacado: % d\n", Valor_saque);
                     fprintf(pont_arq,"valor de tabelas de crédito e de debito:\n%f\n%f\n%f\n%f\n%f\n%f\n%f\n%f\n%f\n%f",tabela[0], tabela[1] ,tabela[2], tabela[3], tabela[4], tabela[5], tabela[6], tabela[7], tabela[8], tabela[9]);
-                    fprintf(pont_arq,"Saldo atual: %d\n",saldo_atual);
+                    fprintf(pont_arq,"\nSaldo atual: %d\n",saldo_atual);
                     fclose(pont_arq);
                     LOOP = 0;
                 break;
