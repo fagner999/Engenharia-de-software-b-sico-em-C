@@ -1,11 +1,8 @@
 /******************************************************************************
- 
                             Online C Compiler.
                 Code, Compile, Run and Debug C program online.
 Write your code in this editor and press "Run" button to compile and execute it.
- 
 *******************************************************************************/
- 
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -17,8 +14,8 @@ int main()
     int Valor_deposito = 0;
     int Valor_saque = 0;
     char usuario[40];
-    float tabela[10] = {0};
-   
+    float tabela[9] = {0};
+   FILE *pont_arq;
     // inicio da logica
     setlocale(LC_ALL,"portuguese");
     LOOP = 1;
@@ -36,11 +33,9 @@ int main()
     scanf("%s",&usuario);
     printf("\ninforme a senha numerica: ");
     scanf("%d",&senha);
-    
-    
+
     system("clear");
         while (LOOP == 1){
-    
     // menu
     system("clear");
     printf("--------------------");
@@ -54,17 +49,13 @@ int main()
     printf("6.Sair\n");
     scanf("%d",& menu_opcao);
      system("clear");
-    
             switch(menu_opcao){
-              
                 case 1:
-                
                     system("clear");
                     printf("Saldo inicial: R$ %d,00\n",saldo_atual);
                     system("sleep 5");
                     system("clear");
                 break;
-                    
                 case 2:
                     system("clear");
                     printf("Saldo atual: R$ %d,00\n",saldo_aleatorio);
@@ -72,8 +63,7 @@ int main()
                     scanf("%d",& Valor_saque);
                     printf("confirme sua senha númerica:\n");
                     scanf("%d",&senhaV);
-                    
-                        if(senhaV == senha && Valor_saque<saldo_aleatorio){
+                        if(senhaV == senha && Valor_saque<saldo_atual){
                             system("clear");
                             printf("--------------------");
                             printf("transição foi aprovada!");
@@ -84,50 +74,40 @@ int main()
                             printf("--------------------\n");
                             system("sleep 2");
                             system("clear");
+                            saldo_atual = saldo_atual - Valor_saque;
                             printf("saque realizado.\nSaldo atual R$ %d,00\n", saldo_atual);
                             system("sleep 5");
-                            
-                            
+
                     }
-                    
                         else{
-                            
                              printf("--------------------");
                             printf("transição foi negada!");
                             printf("--------------------\n");
                             system("clear");
                             system("sleep 5");
-                            
                         }
-                    
                 break;
-                
                 case 3:
-                
                     system("clear");
                     printf("Saldo atual: R$ %d,00\n",saldo_atual);
                     printf("digite o valor do deposito:\n");
                     scanf("%d",& Valor_deposito);
+                    saldo_atual = saldo_atual + Valor_deposito;
                     system("clear");
                     system("sleep 2");
                     printf("deposito realizado.\nSaldo atual R$ %d,00\n", saldo_atual);
                     system("sleep 2");
                 break;   
-                
                 case 4:
-                    
                     system("clear");
                     printf("Informe a quantidade de tabelas de crédito ou de débito\n");
                     scanf("%d", &interacao);  
-                    
                     for (int i; i<interacao; i++){
-                    
                     system("sleep 2");
                     system("clear");
                     printf("Informe o valor:\n");
                     scanf("%d", &valor_tabela);   
                     tabela[i] = valor_tabela;
-                    
                     if(valor_tabela<0 ){
                      int valor_negativo = valor_tabela * -1;   
                         if(valor_negativo < saldo_atual){
@@ -141,26 +121,29 @@ int main()
                             printf("fala na operação\n");
                         }
                     }
-                      
-                
+
                 case 5:
-                
                     system("clear");
                     printf("Saldo inicial: R$ %d,00\n",saldo_atual);
                     system("sleep 5");
                     system("clear");
                 break;
-                
                 case 6:
-                
+                pont_arq = fopen("usuario.txt","w");
+                    fprintf(pont_arq, "--------------------");
+                    fprintf(pont_arq, "Extrato completo de operações");
+                    fprintf(pont_arq,"Usuário: %s\n", usuario);
+                    fprintf(pont_arq,"Saldo inicial: %d\n",saldo_aleatorio);
+                    fprintf(pont_arq,"Valor depositado: %d\n", Valor_deposito);
+                    fprintf(pont_arq,"Valor sacado: % d\n", Valor_saque);
+                    fprintf(pont_arq,"valor de tabelas de crédito e de debito:\n%f\n%f\n%f\n%f\n%f\n%f\n%f\n%f\n%f\n%f",tabela[0], tabela[1] ,tabela[2], tabela[3], tabela[4], tabela[5], tabela[6], tabela[7], tabela[8], tabela[9]);
+                    fprintf(pont_arq,"Saldo atual: %d\n",saldo_atual);
+                    fclose(pont_arq);
                     LOOP = 0;
                 break;
-                
-            
-        
-        
+
+
     }
-    
     }
     return 0;
 }
