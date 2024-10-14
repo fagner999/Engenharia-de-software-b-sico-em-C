@@ -114,7 +114,7 @@ int main()
                             saldo_atual += (valor_tabela);
                         }
                         else{
-                          saldo_atual += (valor_tabela);
+                          printf("falha na operaçõe\n");
                         }
                     }
                     else{
