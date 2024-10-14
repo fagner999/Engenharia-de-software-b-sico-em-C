@@ -33,7 +33,7 @@ int main()
     scanf("%s",&usuario);
     printf("\ninforme a senha numerica: ");
     scanf("%d",&senha);
-
+ 
     system("clear");
         while (LOOP == 1){
     // menu
@@ -77,7 +77,7 @@ int main()
                             saldo_atual = saldo_atual - Valor_saque;
                             printf("saque realizado.\nSaldo atual R$ %d,00\n", saldo_atual);
                             system("sleep 5");
-
+ 
                     }
                         else{
                              printf("--------------------");
@@ -121,7 +121,7 @@ int main()
                             printf("fala na operação\n");
                         }
                     }
-
+ 
                 case 5:
                     system("clear");
                     printf("Saldo inicial: R$ %d,00\n",saldo_atual);
@@ -129,9 +129,12 @@ int main()
                     system("clear");
                 break;
                 case 6:
-                pont_arq = fopen("usuario.txt","w");
+                    char nome_arquivo[50];  
+                    sprintf(nome_arquivo, "%s.txt", usuario);  
+                    pont_arq = fopen(nome_arquivo,"w");
                     fprintf(pont_arq, "--------------------");
                     fprintf(pont_arq, "Extrato completo de operações");
+                    fprintf(pont_arq, "--------------------\n");
                     fprintf(pont_arq,"Usuário: %s\n", usuario);
                     fprintf(pont_arq,"Saldo inicial: %d\n",saldo_aleatorio);
                     fprintf(pont_arq,"Valor depositado: %d\n", Valor_deposito);
@@ -141,8 +144,8 @@ int main()
                     fclose(pont_arq);
                     LOOP = 0;
                 break;
-
-
+ 
+ 
     }
     }
     return 0;
